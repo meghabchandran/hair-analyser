@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-
+import ImageUploader from "./components/ImageUploader";
+import ResultCard from "./components/ResultCard";
 
 function App() {
   const [imgSrc, setImageSrc] = useState(null);
@@ -46,27 +47,29 @@ src.delete();
     };
   };
   
-  return(
+   return (
     <>
-    <input type="file"accept="image/*" onChange={(e)=> {
-      const file = e.target.files[0];
-          if (file) {
-     const reader = new FileReader();
-     reader.onload = () => setImageSrc(reader.result);
-      reader.readAsDataURL(file);
-    } 
-    }
+      {/* ======= Replace this manual input with ImageUploader ======= */}
+      <ImageUploader
+        imageSrc={imgSrc}
+        onImageChange={(src) => {
+          setImageSrc(src);
+          setResult(null);
+        }}
+      />
 
-    }
-    
-    />
-     <canvas ref={canvasRef}></canvas>
-      <button onClick={processImage} disabled={!imageSrc || !cvReady}>
+      
+      <canvas ref={canvasRef}></canvas>
+
+      <button onClick={processImage} disabled={!imgSrc || !cvReady}>
         {cvReady ? "Analyze with OpenCV" : "Loading OpenCV..."}
       </button>
-  </>
+
+     
+      {result && <ResultCard result={result} imageSrc={imgSrc} />}
+    </>
   );
-  
-  }
+}
+
 
 export default App
