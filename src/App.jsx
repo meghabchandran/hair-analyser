@@ -45,6 +45,13 @@ function App() {
       src.delete();
       gray.delete();
       blurred.delete();
+      // Simulate analysis delay and set result
+      setTimeout(() => {
+        // Dummy hair count calculation
+        const hairCount = Math.floor(Math.random() * 100000) + 20000;
+        setResult({ hairCount });
+        setLoading(false); // End scanning effect
+      }, 2000); // 2 seconds scanning
     };
   };
 
@@ -60,14 +67,19 @@ function App() {
       />
 
 
-      <canvas ref={canvasRef}></canvas>
+      <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
 
-      <button onClick={processImage} disabled={!imgSrc || !cvReady}>
-        {cvReady ? "Analyze with OpenCV" : "Loading OpenCV..."}
+      <button onClick={processImage} disabled={!imgSrc || !cvReady || loading}>
+        {loading ? "Scanning..." : cvReady ? "Count Hair" : "Loading OpenCV..."}
       </button>
 
-
-      {result && <ResultCard result={result} imageSrc={imgSrc} />}
+      {imgSrc && (
+        <ResultCard
+          result={result || { hairCount: 0 }}
+          imageSrc={imgSrc}
+          isAnalysing={loading}
+        />
+      )}
     </>
   );
 }
