@@ -11,10 +11,22 @@ function App() {
   const [cvReady, setCvReady] = useState(false);
 
   useEffect(() => {
-    cv.onRuntimeInitialized = () => {
-      setCvReady(true);
-      console.log("OpenCV.js is ready");
-    };
+    let interval = setInterval(() => {
+      if (window.cv && window.cv['onRuntimeInitialized']) {
+        if (!window.cv._hasSetRuntimeInit) {
+          window.cv._hasSetRuntimeInit = true;
+          window.cv.onRuntimeInitialized = () => {
+            setCvReady(true);
+            console.log("OpenCV.js is ready");
+          };
+        }
+      }
+      if (window.cv && window.cv.Mat) {
+        setCvReady(true);
+        clearInterval(interval);
+      }
+    }, 100);
+    return () => clearInterval(interval);
   }, []);
 
   const processImage = () => {
@@ -25,39 +37,37 @@ function App() {
     setLoading(true);
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    const img = new Image();
+    const img = new window.Image();
     img.src = imgSrc;
     img.onload = () => {
       canvas.width = img.width;
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
 
-      const src = cv.imread(canvas);
-      const gray = new cv.Mat();
-      cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
+      const src = window.cv.imread(canvas);
+      const gray = new window.cv.Mat();
+      window.cv.cvtColor(src, gray, window.cv.COLOR_RGBA2GRAY, 0);
 
-      const blurred = new cv.Mat();
-      const ksize = new cv.Size(5, 5);
-      cv.GaussianBlur(gray, blurred, ksize, 0);
+      const blurred = new window.cv.Mat();
+      const ksize = new window.cv.Size(5, 5);
+      window.cv.GaussianBlur(gray, blurred, ksize, 0);
 
-      cv.imshow(canvas, blurred);
+      window.cv.imshow(canvas, blurred);
 
       src.delete();
       gray.delete();
       blurred.delete();
-      // Simulate analysis delay and set result
+
       setTimeout(() => {
-        // Dummy hair count calculation
         const hairCount = Math.floor(Math.random() * 100000) + 20000;
         setResult({ hairCount });
-        setLoading(false); // End scanning effect
-      }, 2000); // 2 seconds scanning
+        setLoading(false);
+      }, 2000);
     };
   };
 
   return (
     <>
-      {/* ======= Replace this manual input with ImageUploader ======= */}
       <ImageUploader
         imageSrc={imgSrc}
         onImageChange={(src) => {
@@ -66,16 +76,15 @@ function App() {
         }}
       />
 
-
       <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
 
       <button onClick={processImage} disabled={!imgSrc || !cvReady || loading}>
         {loading ? "Scanning..." : cvReady ? "Count Hair" : "Loading OpenCV..."}
       </button>
 
-      {imgSrc && (
+      {result && (
         <ResultCard
-          result={result || { hairCount: 0 }}
+          result={result}
           imageSrc={imgSrc}
           isAnalysing={loading}
         />
@@ -83,6 +92,5 @@ function App() {
     </>
   );
 }
-
 
 export default App
