@@ -17,8 +17,22 @@ export default function ImageUploader({ imageSrc, onImageChange }) {
     return (
         <div className="uploader">
             {imageSrc ? (
-                <div className="preview">
+                /*<div className="preview">
                     <img src={imageSrc} alt="preview" />
+                </div>*/
+                <div className="preview">
+                    <img src={imageSrc}
+                        alt="preview"
+                        style={{
+                            width: "300px",
+                            height: "300px",
+                            objectFit: "cover",
+                            borderRadius: "8px",
+                            border: "2px solid #ccc",
+                            boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
+                        }}
+                    />
+
                 </div>
             ) : (
                 <div className="placeholder">No image selected</div>
@@ -30,6 +44,7 @@ export default function ImageUploader({ imageSrc, onImageChange }) {
                     <input type="file" accept="image/*" onChange={handleFile} hidden />
                 </label>
             </div>
+
         </div>
     );
 }
