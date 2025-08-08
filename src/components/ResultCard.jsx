@@ -1,6 +1,5 @@
 
-
-export default function ResultCard({ result, imageSrc }) {
+export default function ResultCard({ result, imageSrc, isAnalysing }) {
     const { hairCount } = result;
 
 
@@ -30,6 +29,7 @@ export default function ResultCard({ result, imageSrc }) {
                     </div>
                 </div>
             </div>
+            st
         </div>
     );
 }
