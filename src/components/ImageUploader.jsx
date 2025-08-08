@@ -17,9 +17,7 @@ export default function ImageUploader({ imageSrc, onImageChange }) {
     return (
         <div className="uploader">
             {imageSrc ? (
-                /*<div className="preview">
-                    <img src={imageSrc} alt="preview" />
-                </div>*/
+
                 <div className="preview">
                     <img src={imageSrc}
                         alt="preview"
