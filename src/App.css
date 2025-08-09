@@ -89,3 +89,40 @@
   color: #2a4d7c;
   font-weight: bold;
 }
+
+.placeholder {
+  padding: 24px 0;
+  color: #888;
+  font-size: 1.2em;
+  letter-spacing: 0.5px;
+}
+
+
+.upload-btn {
+  display: inline-block;
+  margin-top: 12px;
+  margin-bottom: 24px;
+
+  padding: 10px 24px;
+  background: #4f8cff;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.08);
+}
+
+.upload-btn:hover {
+  background: #2a4d7c;
+}
+
+
+button {
+  padding: 10px 24px;
+  margin-bottom: 24px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 500;
+}
