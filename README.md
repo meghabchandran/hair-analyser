@@ -30,6 +30,10 @@ Screenshots
 ![Screenshot 2](src/screenshots/screenshot_2.png)
 ![Screenshot 3](src/screenshots/screenshot_3.png)
 
+Project Demo
+
+![App Demo](src/screenshots/useless_screenrecord.gif)
+
 
 
 
