@@ -13,7 +13,14 @@ export default function ResultCard({ result, imageSrc, isAnalysing }) {
     return (
         <div className="result">
             <div className="result-left" style={{ position: "relative" }}>
-                <img src={imageSrc} alt="result preview" style={{ opacity: isAnalysing ? 0.7 : 1 }} />
+                <img src={imageSrc} alt="result preview" style={{
+                    width: "300px",
+                    height: "300px",
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                    border: "2px solid #ccc",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
+                }} />
                 {isAnalysing && (
                     <div className="scanning-overlay">
                         <div className="scanner-bar"></div>
