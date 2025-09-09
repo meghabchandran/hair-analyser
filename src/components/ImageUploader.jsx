@@ -1,6 +1,4 @@
-
-
-export default function ImageUploader({ imageSrc, onImageChange }) {
+export default function ImageUploader({ imageSrc, onImageChange, isAnalysing }) {
     const handleFile = (e) => {
         const file = e.target.files?.[0];
         if (!file) return;
@@ -17,11 +15,9 @@ export default function ImageUploader({ imageSrc, onImageChange }) {
     return (
         <div className="uploader">
             {imageSrc ? (
-                /*<div className="preview">
-                    <img src={imageSrc} alt="preview" />
-                </div>*/
-                <div className="preview">
-                    <img src={imageSrc}
+                <div className="preview" style={{ position: "relative" }}>
+                    <img
+                        src={imageSrc}
                         alt="preview"
                         style={{
                             width: "300px",
@@ -32,7 +28,12 @@ export default function ImageUploader({ imageSrc, onImageChange }) {
                             boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
                         }}
                     />
-
+                    {isAnalysing && (
+                        <div className="scanning-overlay">
+                            <div className="scanner-bar"></div>
+                            <span className="scanning-text">Scanning...</span>
+                        </div>
+                    )}
                 </div>
             ) : (
                 <div className="placeholder">No image selected</div>
@@ -44,7 +45,6 @@ export default function ImageUploader({ imageSrc, onImageChange }) {
                     <input type="file" accept="image/*" onChange={handleFile} hidden />
                 </label>
             </div>
-
         </div>
     );
 }
