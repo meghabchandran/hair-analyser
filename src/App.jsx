@@ -68,25 +68,28 @@ function App() {
 
   return (
     <>
-      <ImageUploader
-        imageSrc={imgSrc}
-        onImageChange={(src) => {
-          setImageSrc(src);
-          setResult(null);
-        }}
-      />
-
-      <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
-
-      <button onClick={processImage} disabled={!imgSrc || !cvReady || loading}>
-        {loading ? "Scanning..." : cvReady ? "Count Hair" : "Loading OpenCV..."}
-      </button>
-
-      {result && (
+      {!result ? (
+        <>
+          <ImageUploader
+            imageSrc={imgSrc}
+            onImageChange={(src) => {
+              setImageSrc(src);
+              setResult(null);
+            }}
+            isAnalysing={loading}
+          />
+          <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
+          <button className='count-hair-btn'
+            onClick={processImage}
+            disabled={!imgSrc || !cvReady || loading}
+          >
+            {loading ? "Scanning..." : cvReady ? "Count Hair" : "Loading OpenCV..."}
+          </button>
+        </>
+      ) : (
         <ResultCard
           result={result}
           imageSrc={imgSrc}
-          isAnalysing={loading}
         />
       )}
     </>
