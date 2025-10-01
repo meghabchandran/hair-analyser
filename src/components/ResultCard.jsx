@@ -1,4 +1,4 @@
-export default function ResultCard({ result, imageSrc }) {
+export default function ResultCard({ result, imageSrc, onReset }) {
     const { hairCount } = result;
 
     const message =
@@ -12,15 +12,12 @@ export default function ResultCard({ result, imageSrc }) {
 
     return (
         <div className="result">
-            <div className="result-left" style={{ position: "relative" }}>
-                <img src={imageSrc} alt="result preview" style={{
-                    width: "300px",
-                    height: "300px",
-                    objectFit: "cover",
-                    borderRadius: "8px",
-                    border: "2px solid #ccc",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
-                }} />
+            <div className="result-left">
+                <img
+                    src={imageSrc}
+                    alt="Analyzed scalp"
+                    className="result-image"
+                />
             </div>
             <div className="result-right">
                 <h2>Estimated Hair Count</h2>
@@ -28,11 +25,10 @@ export default function ResultCard({ result, imageSrc }) {
                 <p className="msg">{message}</p>
 
                 <div className="redo-section">
-                    <button onClick={() => window.location.reload()}>Analyze Another</button>
-
+                    <button className="upload-btn" onClick={onReset}>
+                        Analyze Another
+                    </button>
                 </div>
-
-
             </div>
         </div>
     );
