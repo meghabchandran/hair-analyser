@@ -106,6 +106,13 @@ body {
   box-shadow: 0 6px 20px rgba(58, 125, 124, 0.4);
 }
 
+.uploader-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
 /* Count Hair button specific styles */
 .count-hair-btn {
   padding: 12px 28px;

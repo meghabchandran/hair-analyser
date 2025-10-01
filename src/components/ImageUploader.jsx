@@ -1,4 +1,11 @@
-export default function ImageUploader({ imageSrc, onImageChange, isAnalysing }) {
+export default function ImageUploader({
+    imageSrc,
+    onImageChange,
+    isAnalysing,
+    processImage,
+    cvReady,
+    loading
+}) {
     const handleFile = (e) => {
         const file = e.target.files?.[0];
         if (!file) return;
@@ -44,6 +51,13 @@ export default function ImageUploader({ imageSrc, onImageChange, isAnalysing }) 
                     Choose Image
                     <input type="file" accept="image/*" onChange={handleFile} hidden />
                 </label>
+                <button
+                    className="count-hair-btn"
+                    onClick={processImage}
+                    disabled={!imageSrc || !cvReady || loading}
+                >
+                    {loading ? "Scanning..." : cvReady ? "Count Hair" : "Loading OpenCV..."}
+                </button>
             </div>
         </div>
     );
