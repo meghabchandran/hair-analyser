@@ -100,6 +100,19 @@ body {
   margin: 0;
 }
 
+.redo-section {
+  display: inline-block;
+  padding: 5px 10px;
+  justify-content: center;
+  /* horizontal center */
+  align-items: center;
+
+
+
+
+
+}
+
 .upload-btn:hover {
   background: var(--dark-green);
   transform: translateY(-2px);
@@ -144,18 +157,26 @@ body {
 /* Result Card */
 .result {
   display: flex;
-  gap: 2rem;
-  margin-top: 2rem;
-  padding: 2rem;
+  gap: 1.2rem;
+  /* reduce space between image and text */
+  margin-top: 1.2rem;
+  /* reduce top margin */
+  padding: 1.2rem;
+  /* reduce padding */
   background: white;
   border-radius: 16px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
 
-.result-left {
-  position: relative;
-  flex-shrink: 0;
+.result-left img,
+.result-image {
+  width: 180px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 3px solid var(--primary);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .result-right {
