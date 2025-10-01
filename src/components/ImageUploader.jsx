@@ -44,13 +44,6 @@ export default function ImageUploader({ imageSrc, onImageChange, isAnalysing }) 
                     Choose Image
                     <input type="file" accept="image/*" onChange={handleFile} hidden />
                 </label>
-                <button
-                    className="count-hair-btn"
-                    onClick={processImage}
-                    disabled={!imgSrc || !cvReady || loading}
-                >
-                    {loading ? "Scanning..." : cvReady ? "Count Hair" : "Loading OpenCV..."}
-                </button>
             </div>
         </div>
     );
